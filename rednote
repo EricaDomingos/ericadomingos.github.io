@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RedNote — Porquê estar lá?</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --red: #E8272A;
+    --red-soft: #FDF1F1;
+    --ink: #1A1A1A;
+    --mid: #6B6B6B;
+    --light: #F7F5F2;
+    --white: #FFFFFF;
+    --border: #E4E0DB;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--light);
+    color: var(--ink);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+
+  header {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 2rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .header-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+
+  .header-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem;
+    color: var(--ink);
+    margin-top: 0.25rem;
+  }
+
+  .header-title span { color: var(--red); }
+
+  .tag {
+    background: var(--red);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.9rem;
+    border-radius: 2rem;
+  }
+
+  main {
+    max-width: 860px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+  }
+
+  .intro {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .intro-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 0.75rem;
+  }
+
+  .intro h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.9rem;
+    line-height: 1.25;
+    margin-bottom: 1rem;
+  }
+
+  .intro p {
+    color: var(--mid);
+    font-size: 0.95rem;
+    max-width: 640px;
+  }
+
+  .stat-banner {
+    background: var(--ink);
+    border-radius: 1rem;
+    padding: 2rem 2.5rem;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .stat {
+    text-align: center;
+    flex: 1;
+    min-width: 120px;
+  }
+
+  .stat-number {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.2rem;
+    color: var(--red);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    color: #aaa;
+    margin-top: 0.3rem;
+    letter-spacing: 0.05em;
+  }
+
+  .stat-divider {
+    width: 1px;
+    height: 50px;
+    background: #333;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 500px) {
+    .stat-divider { display: none; }
+    .stat { flex: 1 1 100%; }
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .section-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 0.4rem;
+  }
+
+  .how-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 580px) { .how-grid { grid-template-columns: 1fr; } }
+
+  .how-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    padding: 1.5rem;
+  }
+
+  .how-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.5rem;
+    color: var(--red-soft);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    -webkit-text-stroke: 1px var(--red);
+  }
+
+  .how-card h4 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+
+  .how-card p {
+    font-size: 0.82rem;
+    color: var(--mid);
+    line-height: 1.55;
+  }
+
+  .comparison {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+
+  .comparison table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+
+  .comparison thead tr { background: var(--ink); color: white; }
+
+  .comparison thead th {
+    padding: 1rem 1.25rem;
+    text-align: left;
+    font-weight: 500;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+  }
+
+  .comparison thead th:first-child { width: 30%; }
+
+  .comparison tbody tr { border-bottom: 1px solid var(--border); }
+  .comparison tbody tr:last-child { border-bottom: none; }
+  .comparison tbody tr:nth-child(even) { background: var(--light); }
+
+  .comparison td {
+    padding: 0.9rem 1.25rem;
+    color: var(--mid);
+    vertical-align: top;
+  }
+
+  .comparison td:first-child { color: var(--ink); font-weight: 500; }
+
+  .yes { color: #2D8B4F !important; font-weight: 600; }
+  .no { color: #C0392B !important; }
+  .partial { color: #D4882A !important; }
+
+  .client-block {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+
+  .client-header {
+    padding: 1.25rem 1.75rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .client-icon { font-size: 1.5rem; }
+
+  .client-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+  }
+
+  .client-sub { font-size: 0.78rem; color: var(--mid); }
+
+  .client-body {
+    padding: 1.75rem;
+  }
+
+  .client-body h4 {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 0.75rem;
+  }
+
+  .reason-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .reason-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  .reason-list li::before {
+    content: '→';
+    color: var(--red);
+    font-weight: 600;
+    flex-shrink: 0;
+    margin-top: 0.05rem;
+  }
+
+  .what-is {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 620px) { .what-is { grid-template-columns: 1fr; } }
+
+  .what-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    padding: 1.75rem;
+  }
+
+  .what-card .icon { font-size: 1.8rem; margin-bottom: 0.75rem; }
+
+  .what-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .what-card p { font-size: 0.88rem; color: var(--mid); line-height: 1.6; }
+
+  .what-card.highlight {
+    background: var(--red);
+    border-color: var(--red);
+    color: white;
+  }
+
+  .what-card.highlight h3,
+  .what-card.highlight p { color: white; }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 1.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    background: var(--white);
+  }
+
+  footer p { font-size: 0.78rem; color: var(--mid); }
+  footer strong { color: var(--ink); }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="header-label">Proposta Estratégica · Loom Agency</div>
+    <div class="header-title">Porquê estar no <span>rednote</span>?</div>
+  </div>
+  <div class="tag">Nova Plataforma · 2026</div>
+</header>
+
+<main>
+
+  <div class="intro">
+    <div class="intro-eyebrow">O que é o rednote?</div>
+    <h2>Imagina o Instagram e o Google<br>a ter um filho chinês.</h2>
+    <p>O rednote (小红书 — "Livrinho Vermelho") é uma plataforma onde as pessoas partilham experiências reais — viagens, restaurantes, atividades — e onde outras pessoas vão <strong>pesquisar</strong> antes de tomar decisões. É uma mistura de rede social com motor de busca, centrada na autenticidade e na confiança entre utilizadores.</p>
+  </div>
+
+  <div class="stat-banner">
+    <div class="stat">
+      <div class="stat-number">300M+</div>
+      <div class="stat-label">Utilizadores ativos por mês</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-number">70%</div>
+      <div class="stat-label">Utilizadores entre os 18 e os 35 anos</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-number">70%</div>
+      <div class="stat-label">Dos utilizadores usa o rednote como motor de pesquisa</div>
+    </div>
+  </div>
+
+  <div class="section-eyebrow">Como funciona?</div>
+  <div class="section-title">Três coisas que o tornam diferente</div>
+
+  <div class="how-grid">
+    <div class="how-card">
+      <div class="how-num">1</div>
+      <h4>Funciona como pesquisa</h4>
+      <p>Os utilizadores pesquisam "passeios de barco Algarve" ou "restaurante português autêntico" — e aparecem posts reais de pessoas reais, não anúncios. Sete em cada dez utilizadores usam a plataforma exatamente assim.</p>
+    </div>
+    <div class="how-card">
+      <div class="how-num">2</div>
+      <h4>Conteúdo que perdura</h4>
+      <p>Ao contrário do Instagram ou TikTok onde um post perde visibilidade em dias, no rednote o conteúdo pode continuar a aparecer em pesquisas durante semanas ou meses — porque funciona como um arquivo pesquisável.</p>
+    </div>
+    <div class="how-card">
+      <div class="how-num">3</div>
+      <h4>Viajantes que planeiam</h4>
+      <p>A audiência são pessoas que estão a planear as férias com antecedência e pesquisam destinos, restaurantes e experiências antes de reservar. A decisão acontece dentro da app.</p>
+    </div>
+  </div>
+
+  <div class="section-eyebrow">Comparação de plataformas</div>
+  <div class="section-title">rednote vs. o que já conheces</div>
+
+  <div class="comparison">
+    <table>
+      <thead>
+        <tr>
+          <th>Plataforma</th>
+          <th>Viajantes que planeiam</th>
+          <th>Conteúdo pesquisável</th>
+          <th>Conteúdo com longevidade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Instagram</td>
+          <td class="partial">Parcialmente</td>
+          <td class="no">Fraco</td>
+          <td class="no">Não</td>
+        </tr>
+        <tr>
+          <td>TikTok</td>
+          <td class="partial">Parcialmente</td>
+          <td class="partial">Médio</td>
+          <td class="no">Não</td>
+        </tr>
+        <tr>
+          <td>Google / TripAdvisor</td>
+          <td class="yes">Sim</td>
+          <td class="yes">Sim</td>
+          <td class="yes">Sim</td>
+        </tr>
+        <tr>
+          <td><strong>rednote</strong></td>
+          <td class="yes">✓ Sim</td>
+          <td class="yes">✓ Sim</td>
+          <td class="yes">✓ Sim</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-eyebrow">A vossa marca no rednote</div>
+  <div class="section-title">Porquê faz sentido para vocês?</div>
+
+  <div class="client-block">
+    <div class="client-header">
+      <div class="client-icon">⛵</div>
+      <div>
+        <div class="client-name">Atlantis Tours</div>
+        <div class="client-sub">Passeios de barco · Algarve</div>
+      </div>
+    </div>
+    <div class="client-body">
+      <h4>Porque faz sentido</h4>
+      <ul class="reason-list">
+        <li>O Algarve já aparece organicamente no rednote — viajantes partilham experiências de barco na região sem ninguém pedir. A procura existe, a presença ainda não.</li>
+        <li>A Gruta de Benagil é um dos locais mais pesquisados e fotografados por viajantes que planeiam visitar o sul de Portugal — estar no rednote é aparecer no radar antes de chegarem.</li>
+        <li>Experiências como dolphin watching ou pôr do sol ao largo da costa têm um forte apelo visual, o tipo de conteúdo que a plataforma favorece.</li>
+        <li>Enquanto os concorrentes não estão lá, a Atlantis Tours pode tornar-se a referência de passeios de barco no Algarve dentro desta plataforma.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="client-block">
+    <div class="client-header">
+      <div class="client-icon">🐟</div>
+      <div>
+        <div class="client-name">Allgarbe</div>
+        <div class="client-sub">Restaurante de Marisco · Portimão</div>
+      </div>
+    </div>
+    <div class="client-body">
+      <h4>Porque faz sentido</h4>
+      <ul class="reason-list">
+        <li>O rednote é uma das plataformas onde viajantes internacionais decidem onde comer — e comida portuguesa autêntica é um tema com forte procura orgânica.</li>
+        <li>Marisco, cataplana e peixe fresco têm um apelo visual imediato — exatamente o tipo de conteúdo que gera partilhas e que o algoritmo da plataforma favorece.</li>
+        <li>A audiência procura "restaurante autêntico Portugal" — não cadeias internacionais, mas sabores e experiências locais genuínas.</li>
+        <li>Um restaurante com boa presença no rednote pode tornar-se referência de boca-em-boca entre comunidades de viagem, mesmo antes de o visitante chegar a Portugal.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="what-is">
+    <div class="what-card">
+      <div class="icon">🕐</div>
+      <h3>Quanto trabalho dá?</h3>
+      <p>O rednote pode ser gerido com 2 a 4 posts por mês, reutilizando conteúdo já produzido para Instagram ou TikTok — com pequenas adaptações de formato e legenda.</p>
+    </div>
+    <div class="what-card">
+      <div class="icon">💬</div>
+      <h3>Preciso de falar chinês?</h3>
+      <p>Não. O inglês funciona bem. A plataforma tem uma audiência internacional crescente e cada vez mais ocidental, especialmente após 2025.</p>
+    </div>
+    <div class="what-card">
+      <div class="icon">📈</div>
+      <h3>Quanto tempo para resultados?</h3>
+      <p>Entre 2 a 3 meses de presença consistente já permite aparecer em pesquisas relevantes. O crescimento é mais gradual, mas muito mais estável e duradouro do que noutras plataformas.</p>
+    </div>
+    <div class="what-card highlight">
+      <div class="icon">🎯</div>
+      <h3>O argumento principal</h3>
+      <p>Enquanto os concorrentes ainda não estão lá, podem ser a primeira referência do vosso nicho no Algarve para uma comunidade global de centenas de milhões de pessoas.</p>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <p>Preparado por <strong>Loom Agency</strong> · Tavira, Algarve</p>
+  <p style="font-size:0.72rem;">Documento confidencial — uso interno e apresentação a clientes</p>
+</footer>
+
+</body>
+</html>
